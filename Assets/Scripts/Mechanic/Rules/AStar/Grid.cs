@@ -4,6 +4,27 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour {
 
+    // s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
+    private static Grid s_Instance = null;
+
+    // This defines a stati c instance property that attempts to find the manager object in the scene and
+    // returns it to the caller.
+    public static Grid instance
+    {
+        get
+        {
+            if (s_Instance == null)
+            {
+                // This is where the magic happens.
+                //  FindObjectOfType(...) returns the first GridManager object in the scene.
+                s_Instance = FindObjectOfType(typeof(Grid)) as Grid;
+                if (s_Instance == null)
+                    Debug.Log("Could not locate an GridManager object. \n You have to have exactly one GridManager in the scene.");
+            }
+            return s_Instance;
+        }
+    }
+
     [System.Serializable]
     public class TerrainType
     {
@@ -23,7 +44,7 @@ public class Grid : MonoBehaviour {
 
 	LayerMask walkableMask;
 
-	Node[,] grid;
+	_Node[,] grid;
 
 	float nodeDiameter;
 	int gridSizeX, gridSizeY;
@@ -51,7 +72,7 @@ public class Grid : MonoBehaviour {
 	}
 
 	void CreateGrid() {
-		grid = new Node[gridSizeX,gridSizeY];
+		grid = new _Node[gridSizeX,gridSizeY];
 		Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x/2 - Vector3.forward * gridWorldSize.y/2;
 
 		for (int x = 0; x < gridSizeX; x ++) {
@@ -73,7 +94,7 @@ public class Grid : MonoBehaviour {
 				}
 
 
-				grid[x,y] = new Node(walkable,worldPoint, x,y, movementPenalty);
+				grid[x,y] = new _Node(walkable,worldPoint, x,y, movementPenalty);
 			}
 		}
 
@@ -129,9 +150,37 @@ public class Grid : MonoBehaviour {
 		}
 
 	}
+    public List<_Node> GetNeighbours(_Node node, bool Hypotenuse)
+    {
+        List<_Node> neighbours = new List<_Node>();
 
-	public List<Node> GetNeighbours(Node node) {
-		List<Node> neighbours = new List<Node>();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+
+                if (x == 0 && y == 0)
+                    continue;
+
+                if (Hypotenuse && (Mathf.Abs(x) == Mathf.Abs(y)))
+                    continue;
+
+                int checkX = node.gridX + x;
+                int checkY = node.gridY + y;
+
+                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                {
+                    neighbours.Add(grid[checkX, checkY]);
+                }
+            }
+        }
+
+        return neighbours;
+    }
+
+
+    public List<_Node> GetNeighbours(_Node node) {
+		List<_Node> neighbours = new List<_Node>();
 
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
@@ -151,7 +200,7 @@ public class Grid : MonoBehaviour {
 	}
 
 
-	public Node NodeFromWorldPoint(Vector3 worldPosition) {
+	public _Node NodeFromWorldPoint(Vector3 worldPosition) {
 		float percentX = (worldPosition.x + gridWorldSize.x/2) / gridWorldSize.x;
 		float percentY = (worldPosition.z + gridWorldSize.y/2) / gridWorldSize.y;
 		percentX = Mathf.Clamp01(percentX);
@@ -165,11 +214,15 @@ public class Grid : MonoBehaviour {
 	void OnDrawGizmos() {
 		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y));
 		if (grid != null && displayGridGizmos) {
-			foreach (Node n in grid) {
+			foreach (_Node n in grid) {
 
 				Gizmos.color = Color.Lerp (Color.white, Color.black, Mathf.InverseLerp (penaltyMin, penaltyMax, n.movementPenalty));
 				Gizmos.color = (n.walkable)?Gizmos.color:Color.red;
-				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter));
+
+                Vector3 size = Vector3.one * nodeDiameter;
+
+                size.y = 0.2f;
+				Gizmos.DrawCube(n.worldPosition, size);
 			}
 		}
 	}
