@@ -2,44 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/State")]
-public class State : ScriptableObject
+namespace KStateMachine
 {
-
-    public Action[] actions;
-    public Transition[] transitions;
-    public Color sceneGizmoColor = Color.grey;
-
-    public void UpdateState(StateController controller)
+    [CreateAssetMenu(menuName = "PluggableAI/State")]
+    public class State : ScriptableObject
     {
-        DoActions(controller);
-        CheckTransitions(controller);
-    }
 
-    private void DoActions(StateController controller)
-    {
-        for (int i = 0; i < actions.Length; i++)
+        public Action[] actions;
+        public Transition[] transitions;
+        public Color sceneGizmoColor = Color.grey;
+
+        public void UpdateState(StateController controller)
         {
-            actions[i].Act(controller);
+            DoActions(controller);
+            CheckTransitions(controller);
         }
-    }
 
-    private void CheckTransitions(StateController controller)
-    {
-        for (int i = 0; i < transitions.Length; i++)    
+        private void DoActions(StateController controller)
         {
-            bool decisionSucceeded = transitions[i].decision.Decide(controller);
-
-            if (decisionSucceeded)
+            for (int i = 0; i < actions.Length; i++)
             {
-                controller.TransitionToState(transitions[i].trueState);
-            }
-            else
-            {
-                controller.TransitionToState(transitions[i].falseState);
+                actions[i].Act(controller);
             }
         }
+
+        private void CheckTransitions(StateController controller)
+        {
+            for (int i = 0; i < transitions.Length; i++)
+            {
+                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+
+                if (decisionSucceeded)
+                {
+                    controller.TransitionToState(transitions[i].trueState);
+                }
+                else
+                {
+                    controller.TransitionToState(transitions[i].falseState);
+                }
+            }
+        }
+
+
     }
-
-
 }

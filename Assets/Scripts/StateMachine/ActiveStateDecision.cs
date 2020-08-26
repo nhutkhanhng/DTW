@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/ActiveState")]
-public class ActiveStateDecision : Decision
+namespace KStateMachine
 {
-    public override bool Decide(StateController controller)
+    [CreateAssetMenu(menuName = "PluggableAI/Decisions/ActiveState")]
+    public class ActiveStateDecision : Decision
     {
-        return (controller.chaseTarget != null);
+        public override bool Decide(StateController controller)
+        {
+            return (controller.chaseTarget != null);
+        }
     }
 }

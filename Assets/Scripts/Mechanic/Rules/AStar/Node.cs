@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Node of A*
 public class _Node : IHeapItem<_Node> {
 	
 	public bool walkable;

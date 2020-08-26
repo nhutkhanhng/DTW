@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7390877621669765967}
   - component: {fileID: 522172428507443013}
   m_Layer: 0
-  m_Name: Enemies
+  m_Name: RedEnemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127015975586542624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.213074, y: -2.0829391, z: 36.28795}
-  m_LocalScale: {x: 2.3349333, y: 2.3349338, z: 2.3349338}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

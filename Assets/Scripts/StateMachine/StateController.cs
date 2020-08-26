@@ -3,69 +3,71 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 //using Complete;
-
-public class StateController : MonoBehaviour
+namespace KStateMachine
 {
-
-    public State currentState;
-
-    public EnemyStats enemyStats;
-
-    public Transform eyes;
-
-    public State remainState;
-
-    [HideInInspector]
-    public Enemy chaseTarget;
-
-    [HideInInspector]
-    public float stateTimeElapsed;
-
-    [HideInInspector]
-    public Turret Tower;
-
-    // public bool aiActive;
-
-
-    void Awake()
-    {
-        Tower = GetComponent<Turret>();        
-    }
-
-    void Update()
+    public class StateController : MonoBehaviour
     {
 
-        currentState.UpdateState(this);
-    }
+        public State currentState;
 
-    void OnDrawGizmos()
-    {
-        if (currentState != null && eyes != null)
+        public EnemyStats enemyStats;
+
+        public Transform eyes;
+
+        public State remainState;
+
+        [HideInInspector]
+        public Enemy chaseTarget;
+
+        [HideInInspector]
+        public float stateTimeElapsed;
+
+        [HideInInspector]
+        public Turret Tower;
+
+        // public bool aiActive;
+
+
+        void Awake()
         {
-            Gizmos.color = currentState.sceneGizmoColor;
-            Gizmos.DrawWireSphere(eyes.position, enemyStats.lookRange);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(eyes.position, enemyStats.attackRange);
+            Tower = GetComponent<Turret>();
         }
-    }
 
-    public void TransitionToState(State nextState)
-    {
-        if (nextState != remainState)
+        void Update()
         {
-            currentState = nextState;
-            OnExitState();
+
+            currentState.UpdateState(this);
         }
-    }
 
-    public bool CheckIfCountDownElapsed(float duration)
-    {
-        stateTimeElapsed += Time.deltaTime;
-        return (stateTimeElapsed >= duration);
-    }
+        void OnDrawGizmos()
+        {
+            if (currentState != null && eyes != null)
+            {
+                Gizmos.color = currentState.sceneGizmoColor;
+                Gizmos.DrawWireSphere(eyes.position, enemyStats.lookRange);
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(eyes.position, enemyStats.attackRange);
+            }
+        }
 
-    private void OnExitState()
-    {
-        stateTimeElapsed = 0;
+        public void TransitionToState(State nextState)
+        {
+            if (nextState != remainState)
+            {
+                currentState = nextState;
+                OnExitState();
+            }
+        }
+
+        public bool CheckIfCountDownElapsed(float duration)
+        {
+            stateTimeElapsed += Time.deltaTime;
+            return (stateTimeElapsed >= duration);
+        }
+
+        private void OnExitState()
+        {
+            stateTimeElapsed = 0;
+        }
     }
 }

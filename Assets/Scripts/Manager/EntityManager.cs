@@ -8,7 +8,7 @@ public class EntityManager : MonoBehaviour
 
     public UnitResource _UnitResource;
 
-    public List<Entity> _EntityIngame = new List<Entity>();
+    public List<EntityInGame> Entites = new List<EntityInGame>();
 
     public Vector3 PositionToSpawn;
 
@@ -47,7 +47,15 @@ public class EntityManager : MonoBehaviour
     public Transform CreateEntity()
     {
         var newObject = UnityEngine.GameObject.Instantiate(_FindResource(_Config._UnitInfo.Prefab));
-        newObject.position = _Config._Transform.Position;
+
+        EntityInGame _Entity = new EntityInGame();
+        _Entity.Setup(_Config, this.PositionToSpawn);
+
+        _Entity._ModelInfo = new ModelComponent() { Prefab = newObject };
+
+        newObject.position = this.PositionToSpawn;
+
+        this.Entites.Add(_Entity);
 
         return newObject;
     }
