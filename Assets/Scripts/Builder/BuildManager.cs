@@ -18,7 +18,7 @@ public class BuildManager : MonoBehaviour {
 	public GameObject sellEffect;
 
 	private TurretBlueprint turretToBuild;
-	private NodeBuilder selectedNode;
+	private IPlacementArea selectedNode;
 
     private bool canBuild;
 	public bool CanBuild { get { return canBuild = ((turretToBuild != null)
@@ -26,7 +26,7 @@ public class BuildManager : MonoBehaviour {
                                 set { canBuild = value; } }
 	public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; } }
 
-	public void SelectNode (NodeBuilder node)
+	public void SelectNode (IPlacementArea node)
 	{
 		if (selectedNode == node)
 		{
