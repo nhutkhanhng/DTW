@@ -10,26 +10,13 @@ namespace KDamaged
     [System.Serializable]
     public class Damageable
     {
-        /// <summary>
-        /// The max health of this instance
-        /// </summary>
         public float maxHealth;
-
         public float startingHealth;
 
-        /// <summary>
-        /// The alignment of the damager
-        /// </summary>
         public SerializableIAlignmentProvider alignment;
 
-        /// <summary>
-        /// Gets the current health.
-        /// </summary>
         public float currentHealth { protected set; get; }
 
-        /// <summary>
-        /// Gets the normalised health.
-        /// </summary>
         public float normalisedHealth
         {
             get
@@ -44,9 +31,6 @@ namespace KDamaged
             }
         }
 
-        /// <summary>
-        /// Gets the <see cref="IAlignmentProvider"/> of this instance
-        /// </summary>
         public IAlignmentProvider alignmentProvider
         {
             get
@@ -54,18 +38,10 @@ namespace KDamaged
                 return alignment != null ? alignment.GetInterface() : null;
             }
         }
-
-        /// <summary>
-        /// Gets whether this instance is dead.
-        /// </summary>
         public bool isDead
         {
             get { return currentHealth <= 0f; }
         }
-
-        /// <summary>
-        /// Gets whether this instance is at max health.
-        /// </summary>
         public bool isAtMaxHealth
         {
             get { return Mathf.Approximately(currentHealth, maxHealth); }
@@ -73,20 +49,13 @@ namespace KDamaged
 
         // events
         public event Action reachedMaxHealth;
-
         public event Action<HealthChangeInfo> damaged, healed, died, healthChanged;
 
-        /// <summary>
-        /// Init this instance
-        /// </summary>
         public virtual void Init()
         {
             currentHealth = startingHealth;
         }
 
-        /// <summary>
-        /// Sets the max health and starting health to the same value
-        /// </summary>
         public void SetMaxHealth(float health)
         {
             if (health <= 0)
@@ -96,9 +65,6 @@ namespace KDamaged
             maxHealth = startingHealth = health;
         }
 
-        /// <summary>
-        /// Sets the max health and starting health separately
-        /// </summary>
         public void SetMaxHealth(float health, float startingHealth)
         {
             if (health <= 0)
@@ -109,20 +75,9 @@ namespace KDamaged
             this.startingHealth = startingHealth;
         }
 
-        /// <summary>
-        /// Sets this instance's health directly.
-        /// </summary>
-        /// <param name="health">
-        /// The value to set <see cref="currentHealth"/> to
-        /// </param>
         public void SetHealth(float health)
         {
-            var info = new HealthChangeInfo
-            {
-                damageable = this,
-                newHealth = health,
-                oldHealth = currentHealth
-            };
+            var info = new HealthChangeInfo { damageable = this, newHealth = health, oldHealth = currentHealth };
 
             currentHealth = health;
 
@@ -151,11 +106,13 @@ namespace KDamaged
             }
 
             ChangeHealth(-damage, output);
-            SafelyDoAction(damaged, output);
+            damaged?.Invoke(output);
+
             if (isDead)
             {
-                SafelyDoAction(died, output);
+                died?.Invoke(output);
             }
+
             return true;
         }
 
@@ -165,10 +122,11 @@ namespace KDamaged
             var info = new HealthChangeInfo { damageable = this };
 
             ChangeHealth(health, info);
-            SafelyDoAction(healed, info);
+            healed?.Invoke(info);
+
             if (isAtMaxHealth)
             {
-                SafelyDoAction(reachedMaxHealth);
+                reachedMaxHealth?.Invoke();
             }
 
             return info;
@@ -185,26 +143,6 @@ namespace KDamaged
             if (healthChanged != null)
             {
                 healthChanged(info);
-            }
-        }
-
-        /// <summary>
-        /// A helper method for null checking actions
-        /// </summary>
-        /// <param name="action">Action to be done</param>
-        protected void SafelyDoAction(Action action)
-        {
-            if (action != null)
-            {
-                action();
-            }
-        }
-
-        protected void SafelyDoAction(Action<HealthChangeInfo> action, HealthChangeInfo info)
-        {
-            if (action != null)
-            {
-                action(info);
             }
         }
     }

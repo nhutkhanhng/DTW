@@ -44,9 +44,9 @@ public class EntityManager : MonoBehaviour
     ///  Việc Caching cần đưcọ xem xét
     /// </summary>
     [ContextMenu("Create")]
-    public Transform CreateEntity()
+    public Transform CreateEntity(EntityInfo Info)
     {
-        var newObject = UnityEngine.GameObject.Instantiate(_FindResource(_Config._UnitInfo.Prefab));
+        var newObject = UnityEngine.GameObject.Instantiate(_FindResource(_Config._Info._UnitInfo.Prefab));
 
         EntityInGame _Entity = new EntityInGame();
         _Entity.Setup(_Config, this.PositionToSpawn);

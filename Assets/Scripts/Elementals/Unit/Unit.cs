@@ -24,7 +24,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void OnPathFound(Vector3[] waypoints, bool pathSuccessful) {
-		if (pathSuccessful) {
+		if (pathSuccessful) {   
 			path = new Path(waypoints, transform.position, turnDst, stoppingDst);
 
 			StopCoroutine("FollowPath");
