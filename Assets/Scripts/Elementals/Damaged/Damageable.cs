@@ -17,7 +17,7 @@ namespace KDamaged
 
         public float currentHealth { protected set; get; }
 
-        public float normalisedHealth
+        public float NormalisedHealth
         {
             get
             {
@@ -38,7 +38,7 @@ namespace KDamaged
                 return alignment != null ? alignment.GetInterface() : null;
             }
         }
-        public bool isDead
+        public bool IsDead
         {
             get { return currentHealth <= 0f; }
         }
@@ -49,7 +49,7 @@ namespace KDamaged
 
         // events
         public event Action reachedMaxHealth;
-        public event Action<HealthChangeInfo> damaged, healed, died, healthChanged;
+        public event Action<HealthChangeInfo> _OnDamaged, _OnHealed, _OnDied, _HealthChanged;
 
         public virtual void Init()
         {
@@ -81,9 +81,9 @@ namespace KDamaged
 
             currentHealth = health;
 
-            if (healthChanged != null)
+            if (_HealthChanged != null)
             {
-                healthChanged(info);
+                _HealthChanged(info);
             }
         }
 
@@ -100,17 +100,17 @@ namespace KDamaged
             bool canDamage = damageAlignment == null || alignmentProvider == null ||
                              damageAlignment.CanHarm(alignmentProvider);
 
-            if (isDead || !canDamage)
+            if (IsDead || !canDamage)
             {
                 return false;
             }
 
             ChangeHealth(-damage, output);
-            damaged?.Invoke(output);
+            _OnDamaged?.Invoke(output);
 
-            if (isDead)
+            if (IsDead)
             {
-                died?.Invoke(output);
+                _OnDied?.Invoke(output);
             }
 
             return true;
@@ -122,7 +122,7 @@ namespace KDamaged
             var info = new HealthChangeInfo { damageable = this };
 
             ChangeHealth(health, info);
-            healed?.Invoke(info);
+            _OnHealed?.Invoke(info);
 
             if (isAtMaxHealth)
             {
@@ -140,9 +140,9 @@ namespace KDamaged
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
             info.newHealth = currentHealth;
 
-            if (healthChanged != null)
+            if (_HealthChanged != null)
             {
-                healthChanged(info);
+                _HealthChanged(info);
             }
         }
     }

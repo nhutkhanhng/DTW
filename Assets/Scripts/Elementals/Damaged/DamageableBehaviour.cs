@@ -10,18 +10,12 @@ namespace KDamaged
     // The truth of me. --- I dont wanna use mono.
     public class DamageableBehaviour : MonoBehaviour
     {
-        /// <summary>
-		/// The Damageable object
-		/// </summary>
 		public Damageable configuration;
 
-        /// <summary>
-        /// Gets whether this <see cref="DamageableBehaviour" /> is dead.
-        /// </summary>
-        /// <value>True if dead</value>
-        public bool isDead
+
+        public bool IsDead
         {
-            get { return configuration.isDead; }
+            get { return configuration.IsDead; }
         }
 
         /// <summary>
@@ -35,40 +29,34 @@ namespace KDamaged
         /// <summary>
         /// Occurs when damage is taken
         /// </summary>
-        public event Action<HitInfo> hit;
+        public event Action<HitInfo> _OnHit;
 
         /// <summary>
         /// Event that is fired when this instance is removed, such as when pooled or destroyed
         /// </summary>
-        public event Action<DamageableBehaviour> removed;
+        public event Action<DamageableBehaviour> _OnRemoved;
 
         /// <summary>
         /// Event that is fired when this instance is killed
         /// </summary>
-        public event Action<DamageableBehaviour> died;
+        public event Action<DamageableBehaviour> _OnDied;
 
-
-        /// <summary>
-        /// Takes the damage and also provides a position for the damage being dealt
-        /// </summary>
-        /// <param name="damageValue">Damage value.</param>
-        /// <param name="damagePoint">Damage point.</param>
-        /// <param name="alignment">Alignment value</param>
         public virtual void TakeDamage(float damageValue, Vector3 damagePoint, IAlignmentProvider alignment)
         {
             HealthChangeInfo info;
             configuration.TakeDamage(damageValue, alignment, out info);
             var damageInfo = new HitInfo(info, damagePoint);
-            if (hit != null)
+
+            if (_OnHit != null)
             {
-                hit(damageInfo);
+                _OnHit(damageInfo);
             }
         }
 
         protected virtual void Awake()
         {
             configuration.Init();
-            configuration.died += OnConfigurationDied;
+            configuration._OnDied += OnConfigurationDied;
         }
 
         /// <summary>
@@ -96,26 +84,20 @@ namespace KDamaged
         /// </summary>
         void OnDeath()
         {
-            if (died != null)
+            if (_OnDied != null)
             {
-                died(this);
+                _OnDied(this);
             }
         }
 
-        /// <summary>
-        /// Fires the removed event
-        /// </summary>
         void OnRemoved()
         {
-            if (removed != null)
+            if (_OnRemoved != null)
             {
-                removed(this);
+                _OnRemoved(this);
             }
         }
 
-        /// <summary>
-        /// Event fired when Damageable takes critical damage
-        /// </summary>
         void OnConfigurationDied(HealthChangeInfo changeInfo)
         {
             OnDeath();
