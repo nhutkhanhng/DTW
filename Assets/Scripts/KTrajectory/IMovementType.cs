@@ -2,6 +2,11 @@
 
 namespace KTrajectory
 {
+    public interface ISpeedData
+    {
+        float Speed { get;}
+    }
+
     public interface IMovementType
     {
         float Speed { get; }

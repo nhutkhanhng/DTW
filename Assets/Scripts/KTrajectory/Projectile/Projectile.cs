@@ -41,18 +41,23 @@ public class Projectile : MonoBehaviour
         /// Kiểu này có vẽ nguy hiểm dữ vậy ta =]]ư.
         /// Nếu mà khai báo thiếu cái _Begin của mình thì lại thành sai flow của mình. Ahihi.
         _DataTrajectory = new FollowData() { _Launcher = this.transform, _Target = Target, _Begin = this.transform.position};
+        //_Movement = new LinearTrajectory() { _Speed = 50f };
+
         _Movement = new ArcingTrajectory() { m_Height = 5f, Speed = 5f };
+
+        ProjectileManager.Instance.AddProjectile(this);
     }
 
-    public void Update()
+    public Vector3 Calculate(float deltaTime)
     {
-        this.transform.position = _Movement.NextPoint(this.transform.position, _DataTrajectory, Time.deltaTime);
+        //if (_Movement.IsPrevReach(this.transform.position, _DataTrajectory, deltaTime))
+        //    return _DataTrajectory.EndPoint;
+        //else
+            return _Movement.NextPoint(this.transform.position, _DataTrajectory, deltaTime);
     }
 
     public void LateUpdate()
     {
         var Hits = CollisionManager.Instance.Collision(this._CollisionData);
-
-        Debug.LogError(Hits.Count);
     }
 }

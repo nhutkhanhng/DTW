@@ -4,6 +4,13 @@ using UnityEngine;
 
 namespace KTrajectory
 {
+    public struct ParabolData
+    {
+        public Vector3 m_Direction;
+        public float m_Height;
+        public float Speed { get; set; }
+    }
+
     public class ParabolTrajectory : IMovementType
     {
         public static Vector3 GetParabolaInitVelocity(Vector3 from, Vector3 to, float gravity = 9.8f, float heightOff = 0.0f, float rangeOff = 0.11f)

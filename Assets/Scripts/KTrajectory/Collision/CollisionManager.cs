@@ -64,7 +64,6 @@ public class CollisionManager : MonoSingleton<CollisionManager>
             if(_collisions.Count > 0)
             {
                 Result.Add(new HitInfoData() { _Data = _Data, _BeHiited = _collisions });
-
             }
         }
 
