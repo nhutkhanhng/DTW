@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Entity
+public class Entity : MonoBehaviour
 {
-    public EntityInfo _Info;
+    public KAlignment.SerializableIAlignmentProvider _alignment;
+    public CollisionData _Collision;
 }

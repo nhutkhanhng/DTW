@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KAlignment;
 
-//public struct HitInfo
-//{
 
-//}
+
+public struct ConditionCollsion
+{
+    public SerializableIAlignmentProvider _Aligment;
+}
+
 public class CollisionData : MonoBehaviour
 {
     public Collider _ColliderData;

@@ -41,11 +41,4 @@ public class EntityInGame
     public RotationConponent _RotationInfo;
 
     public ModelComponent _ModelInfo;
-
-
-    public void Setup(Entity _Config, Vector3 Position)
-    {
-        this._HpInfo.MaxHP = (int)_Config._Info._Hp.Hp;
-        this._HpInfo.Hp = this._HpInfo.MaxHP;
-    }
 }

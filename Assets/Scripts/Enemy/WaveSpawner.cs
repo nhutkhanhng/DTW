@@ -66,8 +66,8 @@ public class WaveSpawner : MonoBehaviour {
 
 	void SpawnEnemy (EntityInfo enemy)
 	{
-        var NewObject = _EntityManager.CreateEntity(enemy);
-        NewObject.position = this.spawnPoint.position;
+        //var NewObject = _EntityManager.CreateEntity(enemy);
+        //NewObject.position = this.spawnPoint.position;
 	}
 
 }

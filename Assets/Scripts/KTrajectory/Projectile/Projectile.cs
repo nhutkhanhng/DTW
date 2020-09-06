@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using KTrajectory;
+using Core.Utilities;
+using KAlignment;
 
 public struct FollowData : ITracjectoryData
 {
@@ -25,39 +27,38 @@ public struct FollowData : ITracjectoryData
     }
 }
 
-public class Projectile : MonoBehaviour
+[System.Serializable]
+public struct PositionData
 {
-    [SerializeField]
-    public Trajectory _Trajectory;
+    public Vector3 Postion;
+}
+
+[System.Serializable]
+public class Projectile
+{
+    public SerializableIAlignmentProvider alignment;
 
     public ITracjectoryData _DataTrajectory;
     public IMovementType _Movement;
 
     public CollisionData _CollisionData;
 
-    public Transform Target;
-    public void Start()
+    [HideInInspector]
+    public BallisticPrefabData _VFX;
+
+    public PositionData _Translation;
+
+    public void Start(Transform _Launcher, Vector3 __Begin, Transform Target, CollisionData _Collision)
     {
         /// Kiểu này có vẽ nguy hiểm dữ vậy ta =]]ư.
         /// Nếu mà khai báo thiếu cái _Begin của mình thì lại thành sai flow của mình. Ahihi.
-        _DataTrajectory = new FollowData() { _Launcher = this.transform, _Target = Target, _Begin = this.transform.position};
+        _DataTrajectory = new FollowData() { _Launcher = _Launcher, _Target = Target, _Begin = __Begin};
         //_Movement = new LinearTrajectory() { _Speed = 50f };
 
         _Movement = new ArcingTrajectory() { m_Height = 5f, Speed = 5f };
+        _Translation.Postion = __Begin;
 
+        _CollisionData = _Collision;
         ProjectileManager.Instance.AddProjectile(this);
-    }
-
-    public Vector3 Calculate(float deltaTime)
-    {
-        //if (_Movement.IsPrevReach(this.transform.position, _DataTrajectory, deltaTime))
-        //    return _DataTrajectory.EndPoint;
-        //else
-            return _Movement.NextPoint(this.transform.position, _DataTrajectory, deltaTime);
-    }
-
-    public void LateUpdate()
-    {
-        var Hits = CollisionManager.Instance.Collision(this._CollisionData);
     }
 }

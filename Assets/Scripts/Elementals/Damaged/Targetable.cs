@@ -43,15 +43,7 @@ namespace KDamaged
             get { return targetableTransform.position; }
         }
 
-        /// <summary>
-        /// Initialises any DamageableBehaviour logic
-        /// </summary>
-        protected override void Awake()
-        {
-            base.Awake();
-            ResetPositionData();
-        }
-
+   
         /// <summary>
         /// Sets up the position data so velocity can be calculated
         /// </summary>

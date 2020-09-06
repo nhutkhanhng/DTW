@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct DamagedData
-{
-    public float Damage;
-}
 public class Assailant : MonoBehaviour
 {
     public CollisionData _Collision;

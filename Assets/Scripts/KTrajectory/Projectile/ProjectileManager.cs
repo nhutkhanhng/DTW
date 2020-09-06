@@ -12,13 +12,16 @@ public class ProjectileManager : MonoSingleton<ProjectileManager>
     public void AddProjectile(Projectile _projectile)
     {
         _ProjectilesIngame.Add(_projectile);
-        _NextPoints.Add(new Vector3(_projectile.transform.position.x, _projectile.transform.position.y, _projectile.transform.position.z));
+        _NextPoints.Add(_projectile._Translation.Postion);
     }
     public void PrevCalculate(float deltaTime)
     {
         for (int i = 0; i < _ProjectilesIngame.Count; i++)
         {
-            _NextPoints[i] = _ProjectilesIngame[i].Calculate(deltaTime);
+            var _Projectiles = _ProjectilesIngame[i];
+
+            _NextPoints[i] = _Projectiles._Movement.NextPoint(
+                _Projectiles._Translation.Postion, _Projectiles._DataTrajectory, deltaTime);
         }
     }
 
@@ -26,13 +29,20 @@ public class ProjectileManager : MonoSingleton<ProjectileManager>
     {
         for (int i = 0; i < _ProjectilesIngame.Count; i++)
         {
-            _ProjectilesIngame[i].transform.position = _NextPoints[i];
+            var _Projectiles = _ProjectilesIngame[i];
+
+            _Projectiles._Translation.Postion = _NextPoints[i];
+            _Projectiles._VFX.Vfx.transform.position = _Projectiles._Translation.Postion;
         }
     }
 
     public void FixedUpdate()
     {
         PrevCalculate(Time.deltaTime);
+    }
+
+    private void Update()
+    {
         DoUpdate(Time.deltaTime);
     }
 }
