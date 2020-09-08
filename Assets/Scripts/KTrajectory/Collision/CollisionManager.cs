@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct HitInfoData
+public class HitInfoData
 {
     public CollisionData _Data;
     public List<CollisionData> _BeHiited;
 }
+
 public class CollisionManager : MonoSingleton<CollisionManager>
 {
     public List<CollisionData> AllCollisionsData = new List<CollisionData>();
@@ -32,7 +33,7 @@ public class CollisionManager : MonoSingleton<CollisionManager>
                                             _caching._ColliderData, _caching.Position, _caching.Rotation,
                                             out _Direction, out Distance))
             {
-                Result.Add(_caching.GetComponent<KDamageable>());
+                // Result.Add(_caching.GetComponent<KDamageable>());
             }
         }
 
@@ -61,13 +62,13 @@ public class CollisionManager : MonoSingleton<CollisionManager>
                                                 _caching._ColliderData, _caching.Position, _caching.Rotation,
                                                 out _Direction, out Distance))
                 {
-                    _collisions.Add(_caching.GetComponent<CollisionData>());
+                    // _collisions.Add(_caching.GetComponent<CollisionData>());
                 }
             }
 
             if(_collisions.Count > 0)
             {
-                Result.Add(new HitInfoData() { _Data = _Data, _BeHiited = _collisions });
+                // Result.Add(new HitInfoData() { _Data = _Data, _BeHiited = _collisions });
             }
         }
 

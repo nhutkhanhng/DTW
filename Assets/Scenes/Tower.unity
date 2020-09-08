@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 380730358}
   - component: {fileID: 380730357}
   - component: {fileID: 380730359}
+  - component: {fileID: 380730351}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -235,6 +236,50 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &380730351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380730350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de91d295f0cd14459185d37ca0dc685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CurrentSate:
+    _DataExecute:
+      _Data:
+        DelayTime: 0
+        Interval: 0
+        Amount: 0
+        EmitPerWave: 0
+      CurrentTime: 0
+      _AmountPerWave: 0
+      _Amount: 0
+    _Bullet:
+      _VFX: {fileID: 0}
+      _Collision: {fileID: 0}
+      LocalScale: {x: 0, y: 0, z: 0}
+    alignment:
+      unityObjectReference: {fileID: 11400000, guid: ddd425040066a5e42a0f3d177c1a90db,
+        type: 2}
+    _AllEnemies:
+    - {fileID: 1140063458}
+    _Launcher:
+      Owner: {fileID: 0}
+      PositionInit: {fileID: 0}
+  _Launcher:
+    Owner: {fileID: 380730355}
+    PositionInit: {fileID: 580339023}
+  _AllEnemies:
+  - {fileID: 1140063458}
+  _Bullet:
+    _VFX: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707, type: 3}
+    _Collision: {fileID: 162466003502695400, guid: deb130548e67522428a8e54f462a8707,
+      type: 3}
+    LocalScale: {x: 0, y: 0, z: 0}
 --- !u!136 &380730352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -348,7 +393,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380730350}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64802a213dbc0ba4cba243f093e38c8d, type: 3}
   m_Name: 
@@ -556,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140063454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.3, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

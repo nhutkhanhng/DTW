@@ -5,7 +5,7 @@ using KAlignment;
 
 
 
-public struct ConditionCollsion
+public class ConditionCollsion
 {
     public SerializableIAlignmentProvider _Aligment;
 }

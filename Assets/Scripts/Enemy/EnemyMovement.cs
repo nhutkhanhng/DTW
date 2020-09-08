@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
         enemy = GetComponent<Enemy>();
 
         if (GameObject.FindGameObjectsWithTag("End").Length > 1)
-            target = GameObject.FindGameObjectsWithTag("End")[Random.RandomRange(1, 19) / 10].transform;
+            target = GameObject.FindGameObjectsWithTag("End")[Random.Range(1, 19) / 10].transform;
         else
             target = GameObject.FindGameObjectWithTag("End").transform;
 
