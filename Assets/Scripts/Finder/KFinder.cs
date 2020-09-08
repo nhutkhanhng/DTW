@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class KDamageable : MonoBehaviour
-{
 
-}
 
 public class KFinder : MonoBehaviour
 {

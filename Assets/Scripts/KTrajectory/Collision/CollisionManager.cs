@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using KDamaged;
-
 [System.Serializable]
 public struct HitInfoData
 {

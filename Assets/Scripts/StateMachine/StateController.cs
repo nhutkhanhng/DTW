@@ -35,19 +35,7 @@ namespace KStateMachine
 
         void Update()
         {
-
             currentState.UpdateState(this);
-        }
-
-        void OnDrawGizmos()
-        {
-            if (currentState != null && eyes != null)
-            {
-                Gizmos.color = currentState.sceneGizmoColor;
-                Gizmos.DrawWireSphere(eyes.position, enemyStats.lookRange);
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(eyes.position, enemyStats.attackRange);
-            }
         }
 
         public void TransitionToState(State nextState)

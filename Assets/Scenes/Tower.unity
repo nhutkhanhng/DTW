@@ -225,8 +225,6 @@ GameObject:
   - component: {fileID: 380730354}
   - component: {fileID: 380730353}
   - component: {fileID: 380730352}
-  - component: {fileID: 380730351}
-  - component: {fileID: 380730356}
   - component: {fileID: 380730358}
   - component: {fileID: 380730357}
   - component: {fileID: 380730359}
@@ -237,24 +235,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &380730351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380730350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7abc9015dceb71f498ca8c78e0e872c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configuration:
-    maxHealth: 100
-    startingHealth: 10
-    alignment:
-      unityObjectReference: {fileID: 11400000, guid: ddd425040066a5e42a0f3d177c1a90db,
-        type: 2}
 --- !u!136 &380730352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -332,20 +312,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &380730356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380730350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eefc2986c5a5564dacaf907096b5207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireParticleSystem: {fileID: 198278080792148898, guid: a4e0e87699dbd400aaf85d616d2618f8,
-    type: 3}
 --- !u!114 &380730357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +479,6 @@ GameObject:
   - component: {fileID: 1140063457}
   - component: {fileID: 1140063456}
   - component: {fileID: 1140063455}
-  - component: {fileID: 1140063459}
   - component: {fileID: 1140063460}
   - component: {fileID: 1140063461}
   m_Layer: 0
@@ -597,24 +562,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1140063459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140063454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7abc9015dceb71f498ca8c78e0e872c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configuration:
-    maxHealth: 10
-    startingHealth: 5
-    alignment:
-      unityObjectReference: {fileID: 11400000, guid: cc8b4641e1fb433469547c53e36a3578,
-        type: 2}
 --- !u!114 &1140063460
 MonoBehaviour:
   m_ObjectHideFlags: 0
