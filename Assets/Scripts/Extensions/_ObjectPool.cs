@@ -15,7 +15,7 @@ using System.Threading;
 /// <summary>
 /// This class as same as ObjectPool In .netCore
 /// </summary>
-internal sealed class KObjectPool<T> where T : class
+public sealed class KObjectPool<T> where T : class
 {
     private readonly KObjectPool<T>.Element[] _items;
     private readonly Func<T> _factory;

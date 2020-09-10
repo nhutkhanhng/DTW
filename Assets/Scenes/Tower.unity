@@ -259,8 +259,10 @@ MonoBehaviour:
       _AmountPerWave: 0
       _Amount: 0
     _Bullet:
-      _VFX: {fileID: 0}
-      _Collision: {fileID: 0}
+      _VFX: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707,
+        type: 3}
+      _Collision: {fileID: 162466003502695400, guid: deb130548e67522428a8e54f462a8707,
+        type: 3}
       LocalScale: {x: 0, y: 0, z: 0}
     alignment:
       unityObjectReference: {fileID: 11400000, guid: ddd425040066a5e42a0f3d177c1a90db,
@@ -279,7 +281,7 @@ MonoBehaviour:
     _VFX: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707, type: 3}
     _Collision: {fileID: 162466003502695400, guid: deb130548e67522428a8e54f462a8707,
       type: 3}
-    LocalScale: {x: 0, y: 0, z: 0}
+    LocalScale: {x: 1, y: 1, z: 1}
 --- !u!136 &380730352
 CapsuleCollider:
   m_ObjectHideFlags: 0

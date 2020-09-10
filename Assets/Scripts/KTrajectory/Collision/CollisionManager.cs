@@ -15,6 +15,8 @@ public class CollisionManager : MonoSingleton<CollisionManager>
 
     public List<HitInfoData> _Hits = new List<HitInfoData>();
 
+    public KObjectPool<HitInfoData> _PoolHitInfo = new KObjectPool<HitInfoData>(() => new HitInfoData());
+
     public List<KDamageable> Collision(CollisionData _Data)
     {
         List<KDamageable> Result = new List<KDamageable>();
@@ -33,7 +35,7 @@ public class CollisionManager : MonoSingleton<CollisionManager>
                                             _caching._ColliderData, _caching.Position, _caching.Rotation,
                                             out _Direction, out Distance))
             {
-                // Result.Add(_caching.GetComponent<KDamageable>());
+                Result.Add(_caching.GetComponent<KDamageable>());
             }
         }
 
@@ -43,10 +45,13 @@ public class CollisionManager : MonoSingleton<CollisionManager>
     public List<HitInfoData> DoUpdate(float deltaTime)
     {
         List<HitInfoData> Result = new List<HitInfoData>();
+        List<CollisionData> _collisions = new List<CollisionData>();
+
         for (int i = 0; i < AllCollisionsData.Count; i++)
         {
+            //_collisions.Clear();
+            _collisions = new List<CollisionData>();
             var _Data = AllCollisionsData[i];
-            List<CollisionData> _collisions = new List<CollisionData>();
 
             for (int j = 0; j < AllCollisionsData.Count; j++)
             {
@@ -62,7 +67,7 @@ public class CollisionManager : MonoSingleton<CollisionManager>
                                                 _caching._ColliderData, _caching.Position, _caching.Rotation,
                                                 out _Direction, out Distance))
                 {
-                    // _collisions.Add(_caching.GetComponent<CollisionData>());
+                    _collisions.Add(_caching.GetComponent<CollisionData>());
                 }
             }
 
