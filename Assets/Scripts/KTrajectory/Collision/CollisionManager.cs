@@ -17,30 +17,30 @@ public class CollisionManager : MonoSingleton<CollisionManager>
 
     public KObjectPool<HitInfoData> _PoolHitInfo = new KObjectPool<HitInfoData>(() => new HitInfoData());
 
-    public List<KDamageable> Collision(CollisionData _Data)
-    {
-        List<KDamageable> Result = new List<KDamageable>();
+    //public List<KDamageable> Collision(CollisionData _Data)
+    //{
+    //    List<KDamageable> Result = new List<KDamageable>();
 
-        for(int i = 0; i < AllCollisionsData.Count; i++)
-        {
-            if (AllCollisionsData[i].Equals(_Data))
-                continue;
+    //    for(int i = 0; i < AllCollisionsData.Count; i++)
+    //    {
+    //        if (AllCollisionsData[i].Equals(_Data))
+    //            continue;
 
-            var _caching = AllCollisionsData[i];
+    //        var _caching = AllCollisionsData[i];
 
-            Vector3 _Direction;
-            float Distance = 0f;
+    //        Vector3 _Direction;
+    //        float Distance = 0f;
 
-            if (Physics.ComputePenetration(_Data._ColliderData, _Data.Position, _Data.Rotation,
-                                            _caching._ColliderData, _caching.Position, _caching.Rotation,
-                                            out _Direction, out Distance))
-            {
-                Result.Add(_caching.GetComponent<KDamageable>());
-            }
-        }
+    //        if (Physics.ComputePenetration(_Data._ColliderData, _Data.Position, _Data.Rotation,
+    //                                        _caching._ColliderData, _caching.Position, _caching.Rotation,
+    //                                        out _Direction, out Distance))
+    //        {
+    //            Result.Add(_caching.GetComponent<KDamageable>());
+    //        }
+    //    }
 
-        return Result;
-    }
+    //    return Result;
+    //}
 
     public List<HitInfoData> DoUpdate(float deltaTime)
     {

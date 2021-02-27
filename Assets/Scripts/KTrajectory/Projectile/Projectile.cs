@@ -53,9 +53,10 @@ public class Projectile
         /// Kiểu này có vẽ nguy hiểm dữ vậy ta =]]ư.
         /// Nếu mà khai báo thiếu cái _Begin của mình thì lại thành sai flow của mình. Ahihi.
         _DataTrajectory = new FollowData() { _Launcher = _Launcher, _Target = Target, _Begin = __Begin};
-        //_Movement = new LinearTrajectory() { _Speed = 50f };
 
-        _Movement = new ArcingTrajectory() { m_Height = 5f, Speed = 5f };
+        _Movement = new LinearTrajectory() { _Speed = 5f };
+
+        // _Movement = new ArcingTrajectory() { m_Height = 5f, Speed = 5f };
         _Translation.Postion = __Begin;
 
         _CollisionData = _Collision;

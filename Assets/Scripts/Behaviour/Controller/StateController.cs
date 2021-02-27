@@ -16,7 +16,13 @@ public class StateController : MonoBehaviour
         {
             _DataExecute = new AttackState.AttackExecuteData()
             {
-                _Data = new AttackData() { Amount = 1, DelayTime = 0, EmitPerWave = 1 , Interval = 0.1f}
+                _Data = new AttackData()
+                {
+                    Amount = 1,
+                    DelayTime = 0,
+                    EmitPerWave = 1,
+                    Interval = 1f
+                }
             },
             _Attack = new RocketAttack(),
             _Launcher = this._Launcher,

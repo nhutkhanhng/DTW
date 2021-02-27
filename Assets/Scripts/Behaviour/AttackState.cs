@@ -14,7 +14,7 @@ public struct AttackData
     public float EmitPerWave;
 }
 
-public abstract class AttackBehaviour
+public abstract class AttackBehaviour : ScriptableObject
 {
     public abstract void OnInit();
 

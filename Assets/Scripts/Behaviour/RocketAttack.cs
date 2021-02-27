@@ -27,24 +27,21 @@ public class RocketAttack : AttackBehaviour
 
     protected void Launch(List<Transform> _Targets, AttackState _Controller)
     {
-        if (Amount <= 150)
+        for (int i = 0; i < _Targets.Count; i++)
         {
-            for (int i = 0; i < _Targets.Count; i++)
-            {
-                var _newBullet = new Projectile();
+            Amount++;
 
-                _newBullet._VFX.Vfx = Poolable.TryGetPoolable(_Controller._Bullet._VFX);
-                Amount++;
-                _newBullet._VFX.Vfx.transform.localScale = _Controller._Bullet.LocalScale;
-                _newBullet._VFX.Vfx.name = "Bullet-" + Amount;
-                _newBullet.alignment = _Controller.alignment;
+            var _newBullet = new Projectile();
 
-                _newBullet.Start(_Controller._Launcher.Owner, _Controller._Launcher.PositionInit.position, _Targets[i].transform,
-                    _newBullet._VFX.Vfx.GetComponent<CollisionData>());
-            }
+            _newBullet._VFX.Vfx = Poolable.TryGetPoolable(_Controller._Bullet._VFX);
+
+            _newBullet._VFX.Vfx.transform.localScale = _Controller._Bullet.LocalScale;
+            _newBullet._VFX.Vfx.name = "Bullet-" + Amount;
+            _newBullet.alignment = _Controller.alignment;
+
+            _newBullet.Start(_Controller._Launcher.Owner, _Controller._Launcher.PositionInit.position, _Targets[i].transform,
+                _newBullet._VFX.Vfx.GetComponent<CollisionData>());
         }
-        //else
-        //    Debug.Break();
     }
 
     public override void DoUpdate(AttackState _controller)
