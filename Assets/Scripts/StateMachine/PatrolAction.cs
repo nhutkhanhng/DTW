@@ -20,8 +20,6 @@ namespace KStateMachine
             // Make this into a rotation in the y axis.
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
-            // Apply this rotation to the rigidbody's rotation.
-            controller.Tower.rig.MoveRotation(controller.Tower.rig.rotation * turnRotation);
         }
     }
 }

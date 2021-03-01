@@ -9,6 +9,7 @@ public class UnitInfo : KScriptableObject
 {
     public int Id;
     public Transform Prefab;
+    public CollisionData Collider;
 }
 
 

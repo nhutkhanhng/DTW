@@ -32,7 +32,6 @@ public class ProjectileManager : MonoSingleton<ProjectileManager>
             var _Projectiles = _ProjectilesIngame[i];
 
             _Projectiles._Translation.Postion = _NextPoints[i];
-            _Projectiles._VFX.Vfx.transform.position = _Projectiles._Translation.Postion;
         }
     }
 

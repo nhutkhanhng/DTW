@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641305, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 4890085278179872738, guid: dbb3c0dab2035f442b01c81488f44a13,
+    type: 2}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +119,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -227,7 +230,6 @@ GameObject:
   - component: {fileID: 380730352}
   - component: {fileID: 380730358}
   - component: {fileID: 380730357}
-  - component: {fileID: 380730359}
   - component: {fileID: 380730351}
   m_Layer: 0
   m_Name: Tower
@@ -245,43 +247,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 380730350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de91d295f0cd14459185d37ca0dc685, type: 3}
+  m_Script: {fileID: 11500000, guid: aefa8b7510a04af4ba9d2087e9b84ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CurrentSate:
+  Level: 0
+  Attacker:
     _DataExecute:
       _Data:
-        DelayTime: 0
-        Interval: 0
-        Amount: 0
-        EmitPerWave: 0
-      CurrentTime: 0
-      _AmountPerWave: 0
-      _Amount: 0
-    _Bullet:
-      _VFX: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707,
-        type: 3}
-      _Collision: {fileID: 162466003502695400, guid: deb130548e67522428a8e54f462a8707,
-        type: 3}
-      LocalScale: {x: 0, y: 0, z: 0}
+        Interval: 1
+        Amount: 5
+        EmitPerWave: 1
+    BulletVfx: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707,
+      type: 3}
     alignment:
       unityObjectReference: {fileID: 11400000, guid: ddd425040066a5e42a0f3d177c1a90db,
         type: 2}
-    _AllEnemies:
-    - {fileID: 1140063458}
-    _Launcher:
-      Owner: {fileID: 0}
-      PositionInit: {fileID: 0}
-  _Launcher:
-    Owner: {fileID: 380730355}
-    PositionInit: {fileID: 580339023}
-  _AllEnemies:
-  - {fileID: 1140063458}
-  _Bullet:
-    _VFX: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707, type: 3}
-    _Collision: {fileID: 162466003502695400, guid: deb130548e67522428a8e54f462a8707,
-      type: 3}
-    LocalScale: {x: 1, y: 1, z: 1}
 --- !u!136 &380730352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -311,6 +291,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -335,6 +316,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &380730354
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -355,7 +337,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1647560973}
-  - {fileID: 914943386}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -384,34 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e616bc50961b254caa22bfc4937934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alignment:
-    unityObjectReference: {fileID: 11400000, guid: cc8b4641e1fb433469547c53e36a3578,
-      type: 2}
   _Collision: {fileID: 380730357}
---- !u!114 &380730359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380730350}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64802a213dbc0ba4cba243f093e38c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alignment:
-    unityObjectReference: {fileID: 11400000, guid: ddd425040066a5e42a0f3d177c1a90db,
-      type: 2}
-  _Bullet:
-    _VFX: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707, type: 3}
-    _Collision: {fileID: 162466003502695400, guid: deb130548e67522428a8e54f462a8707,
-      type: 3}
-    LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  _Finder:
-    _Targets:
-    - {fileID: 1140063458}
-  _PositionLaunch: {fileID: 580339023}
 --- !u!1 &580339022
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,78 +396,6 @@ Transform:
   m_Father: {fileID: 1647560973}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &914943385
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 914943386}
-  - component: {fileID: 914943388}
-  - component: {fileID: 914943387}
-  - component: {fileID: 914943389}
-  m_Layer: 0
-  m_Name: RadiusFinder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &914943386
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914943385}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 380730355}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &914943387
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914943385}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 15
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &914943388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914943385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af97e07ac4f21644dbec1972be0770d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ColliderData: {fileID: 914943387}
---- !u!114 &914943389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914943385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ce1e661d546f9846972f9b7bd924b11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Rada: {fileID: 914943388}
 --- !u!1 &1140063454
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +445,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -587,6 +470,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1140063457
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -634,9 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e616bc50961b254caa22bfc4937934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alignment:
-    unityObjectReference: {fileID: 11400000, guid: cc8b4641e1fb433469547c53e36a3578,
-      type: 2}
   _Collision: {fileID: 1140063460}
 --- !u!1 &1495132118
 GameObject:
@@ -714,6 +595,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1495132120
@@ -763,6 +645,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -787,6 +670,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1647560972
 MeshFilter:
   m_ObjectHideFlags: 0

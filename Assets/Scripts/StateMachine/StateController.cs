@@ -22,16 +22,7 @@ namespace KStateMachine
         [HideInInspector]
         public float stateTimeElapsed;
 
-        [HideInInspector]
-        public Turret Tower;
-
         // public bool aiActive;
-
-
-        void Awake()
-        {
-            Tower = GetComponent<Turret>();
-        }
 
         void Update()
         {

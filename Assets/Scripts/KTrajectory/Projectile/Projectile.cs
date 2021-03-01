@@ -42,11 +42,9 @@ public class Projectile
     public IMovementType _Movement;
 
     public CollisionData _CollisionData;
-
-    [HideInInspector]
-    public BallisticPrefabData _VFX;
-
     public PositionData _Translation;
+
+    public Transform _Vfx;
 
     public void Start(Transform _Launcher, Vector3 __Begin, Transform Target, CollisionData _Collision)
     {

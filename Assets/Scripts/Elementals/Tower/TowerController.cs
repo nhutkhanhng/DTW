@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public class TowerData
+{
+    public byte Level;
+    public Transform Prefab;
+}
+
+public enum ETowerStatus
+{
+    Building,
+    Destroying,
+
+
+    Idle,
+    Attacking,
+    Looking,
+}
+
 public class TowerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public State _CurrentState;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int Level;
+
+
+    public AttackState Attacker;
 }

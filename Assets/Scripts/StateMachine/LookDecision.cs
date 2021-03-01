@@ -21,35 +21,35 @@ namespace KStateMachine
 
             if (controller.chaseTarget == null)
             {
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-                float shortestDistance = Mathf.Infinity;
+                //float shortestDistance = Mathf.Infinity;
 
-                GameObject nearestEnemy = null;
+                //GameObject nearestEnemy = null;
 
-                foreach (GameObject enemy in enemies)
-                {
-                    float distanceToEnemy = Vector3.Distance(controller.Tower.transform.position, enemy.transform.position);
-                    if (distanceToEnemy < shortestDistance)
-                    {
-                        shortestDistance = distanceToEnemy;
-                        nearestEnemy = enemy;
-                    }
-                }
+                //foreach (GameObject enemy in enemies)
+                //{
+                //    float distanceToEnemy = Vector3.Distance(controller.Tower.transform.position, enemy.transform.position);
+                //    if (distanceToEnemy < shortestDistance)
+                //    {
+                //        shortestDistance = distanceToEnemy;
+                //        nearestEnemy = enemy;
+                //    }
+                //}
 
-                if (nearestEnemy != null && shortestDistance <= controller.enemyStats.lookRange)
-                {
-                    controller.chaseTarget = nearestEnemy.GetComponent<Enemy>();
-                    controller.Tower.targetEnemy = controller.chaseTarget;
-                    controller.Tower.target = nearestEnemy.transform;
+                //if (nearestEnemy != null && shortestDistance <= controller.enemyStats.lookRange)
+                //{
+                //    controller.chaseTarget = nearestEnemy.GetComponent<Enemy>();
+                //    controller.Tower.targetEnemy = controller.chaseTarget;
+                //    controller.Tower.target = nearestEnemy.transform;
 
-                    return true;
-                }
-                else
-                {
-                    controller.Tower.target = null;
-                    return false;
-                }
+                //    return true;
+                //}
+                //else
+                //{
+                //    controller.Tower.target = null;
+                //    return false;
+                //}
             }
 
             return false;
