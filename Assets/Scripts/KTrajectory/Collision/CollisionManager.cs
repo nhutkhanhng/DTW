@@ -6,51 +6,31 @@ using UnityEngine;
 public class HitInfoData
 {
     public CollisionData _Data;
-    public List<CollisionData> _BeHiited;
+    public List<CollisionData> _BeHitted;
 }
 
 public class CollisionManager : MonoSingleton<CollisionManager>
 {
     public List<CollisionData> AllCollisionsData = new List<CollisionData>();
 
+    // public List<CollisionData> Projectiles = new List<CollisionData>();
+
     public List<HitInfoData> _Hits = new List<HitInfoData>();
 
     public KObjectPool<HitInfoData> _PoolHitInfo = new KObjectPool<HitInfoData>(() => new HitInfoData());
-
-    //public List<KDamageable> Collision(CollisionData _Data)
-    //{
-    //    List<KDamageable> Result = new List<KDamageable>();
-
-    //    for(int i = 0; i < AllCollisionsData.Count; i++)
-    //    {
-    //        if (AllCollisionsData[i].Equals(_Data))
-    //            continue;
-
-    //        var _caching = AllCollisionsData[i];
-
-    //        Vector3 _Direction;
-    //        float Distance = 0f;
-
-    //        if (Physics.ComputePenetration(_Data._ColliderData, _Data.Position, _Data.Rotation,
-    //                                        _caching._ColliderData, _caching.Position, _caching.Rotation,
-    //                                        out _Direction, out Distance))
-    //        {
-    //            Result.Add(_caching.GetComponent<KDamageable>());
-    //        }
-    //    }
-
-    //    return Result;
-    //}
 
     public List<HitInfoData> DoUpdate(float deltaTime)
     {
         List<HitInfoData> Result = new List<HitInfoData>();
         List<CollisionData> _collisions = new List<CollisionData>();
 
+        Vector3 _Direction;
+        float Distance = 0f;
+
         for (int i = 0; i < AllCollisionsData.Count; i++)
         {
-            //_collisions.Clear();
-            _collisions = new List<CollisionData>();
+            _collisions.Clear();
+            // _collisions = new List<CollisionData>();
             var _Data = AllCollisionsData[i];
 
             for (int j = 0; j < AllCollisionsData.Count; j++)
@@ -60,8 +40,7 @@ public class CollisionManager : MonoSingleton<CollisionManager>
                 if (_caching.Equals(_Data))
                     continue;
 
-                Vector3 _Direction;
-                float Distance = 0f;
+
 
                 if (Physics.ComputePenetration(_Data._ColliderData, _Data.Position, _Data.Rotation,
                                                 _caching._ColliderData, _caching.Position, _caching.Rotation,
@@ -73,7 +52,12 @@ public class CollisionManager : MonoSingleton<CollisionManager>
 
             if(_collisions.Count > 0)
             {
-                // Result.Add(new HitInfoData() { _Data = _Data, _BeHiited = _collisions });
+                for(int iP = 0; iP < _collisions.Count; iP++)
+                {
+                    Debug.LogError(_Data.transform.name + "  _-- " + _collisions[iP].transform.name);
+                }
+
+                Result.Add(new HitInfoData() { _Data = _Data, _BeHitted = _collisions });
             }
         }
 

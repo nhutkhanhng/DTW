@@ -2,16 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct AttackData
-{
-    public float Interval;
-
-    public float Amount;
-
-    public float EmitPerWave;
-}
-
 
 public abstract class AttackBehaviour
 {

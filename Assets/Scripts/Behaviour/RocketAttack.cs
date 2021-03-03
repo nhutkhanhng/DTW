@@ -9,6 +9,15 @@ using KAlignment;
 [CreateAssetMenu(menuName = "Behaviour/RocketAttack")]
 public class RocketAttack : AttackBehaviour
 {
+    public enum State
+    {
+        Enter,
+        Attacking,
+        Waitting,
+        Exit,
+
+        Interrup,
+    }
     protected int Amount = 0;
     public override void DoEnter(AttackState _controller)
     {
@@ -38,7 +47,7 @@ public class RocketAttack : AttackBehaviour
 
             var _newBullet = new Projectile();
 
-            _newBullet._Vfx = Poolable.TryGetPoolable(_InfoState.BulletVfx).transform;
+            _newBullet._Vfx = Poolable.TryGetPoolable(_InfoState._DataExecute._Bullet.Vfx).transform;
             _newBullet._Vfx.name = "Bullet-" + Amount;
 
             _newBullet.alignment = _InfoState.alignment;

@@ -6,7 +6,6 @@ using UnityEngine;
 public class ProjectileManager : MonoSingleton<ProjectileManager>
 {
     public List<Projectile> _ProjectilesIngame = new List<Projectile>();
-
     public List<Vector3> _NextPoints = new List<Vector3>();
 
     public void AddProjectile(Projectile _projectile)
@@ -16,23 +15,38 @@ public class ProjectileManager : MonoSingleton<ProjectileManager>
     }
     public void PrevCalculate(float deltaTime)
     {
+        Projectile _Projectile = null;
+
         for (int i = 0; i < _ProjectilesIngame.Count; i++)
         {
-            var _Projectiles = _ProjectilesIngame[i];
+            _Projectile = _ProjectilesIngame[i];
 
-            _NextPoints[i] = _Projectiles._Movement.NextPoint(
-                _Projectiles._Translation.Postion, _Projectiles._DataTrajectory, deltaTime);
+            _NextPoints[i] = _Projectile._Movement.NextPoint(
+                _Projectile._Translation.Postion, _Projectile._DataTrajectory, deltaTime);
         }
     }
 
     public void DoUpdate(float deltaTime)
     {
+        Projectile _Projectile;
         for (int i = 0; i < _ProjectilesIngame.Count; i++)
         {
-            var _Projectiles = _ProjectilesIngame[i];
+            _Projectile = _ProjectilesIngame[i];
 
-            _Projectiles._Translation.Postion = _NextPoints[i];
+            _Projectile._Translation.Postion = _NextPoints[i];
+            _Projectile._Vfx.transform.position = _Projectile._Translation.Postion;
         }
+    }
+
+    public void Remove(Projectile projectile)
+    {
+
+    }
+
+    public void Remove(int index)
+    {
+        _ProjectilesIngame.RemoveAt(index);
+        _NextPoints.RemoveAt(index);
     }
 
     public void FixedUpdate()

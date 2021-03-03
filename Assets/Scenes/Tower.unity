@@ -250,15 +250,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefa8b7510a04af4ba9d2087e9b84ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Launcher:
+    Owner: {fileID: 380730355}
+    PositionInit: {fileID: 580339023}
+  AllEnemies:
+  - {fileID: 1140063458}
   Level: 0
   Attacker:
     _DataExecute:
       _Data:
         Interval: 1
-        Amount: 5
+        Amount: 999999
         EmitPerWave: 1
-    BulletVfx: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707,
-      type: 3}
+      _Bullet:
+        Vfx: {fileID: 1040602544822128292, guid: deb130548e67522428a8e54f462a8707,
+          type: 3}
+        Scale: {x: 1, y: 1, z: 1}
+      _VfxHit:
+        Vfx: {fileID: 7021314854487531145, guid: 8d6b3dfbca7e41f4a869dd6be48bc148,
+          type: 3}
+        Scale: {x: 1, y: 1, z: 1}
     alignment:
       unityObjectReference: {fileID: 11400000, guid: ddd425040066a5e42a0f3d177c1a90db,
         type: 2}

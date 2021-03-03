@@ -13,21 +13,18 @@ public abstract class State
 }
 
 
+
 public static class AttackExecuteExtension
 {
     public static bool IsCanAttack(this AttackExecuteData _Execute)
     {
         return _Execute.CurrentTime >= _Execute._Data.Interval * _Execute._Amount;
     }
-}
-[System.Serializable]
-public class AttackExecuteData
-{
-    public AttackData _Data;
 
-    [System.NonSerialized] public float _AmountPerWave = 0;
-    [System.NonSerialized] public float _Amount = 0;
-    [System.NonSerialized] public float CurrentTime = 0;
+    public static bool IsNoMore(this AttackExecuteData _Execute)
+    {
+        return _Execute._Amount >= _Execute._Data.Amount;
+    }
 }
 
 [System.Serializable]
@@ -43,8 +40,6 @@ public class AttackState : State
     public AttackExecuteData _DataExecute;
     public AttackBehaviour _Attack;
 
-    public GameObject BulletVfx;
-
     /*[System.NonSerialized]*/ public SerializableIAlignmentProvider alignment;
     public List<Transform> _AllEnemies { get; set; }
 
@@ -57,7 +52,7 @@ public class AttackState : State
 
     public override void DoUpdate(StateController _controller)
     {
-        if (_DataExecute.IsCanAttack())
+        if (_DataExecute.IsCanAttack() && !_DataExecute.IsNoMore())
         {
             _Attack.DoLaunch(this);
             _DataExecute._Amount++;
