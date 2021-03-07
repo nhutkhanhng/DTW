@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdf384545e778104ab7568caa0ba842e, type: 3}
-  m_Name: LookDecisiona
+  m_Script: {fileID: 11500000, guid: d179d10363d505f41a01c3b2cbd9d62f, type: 3}
+  m_Name: Lazor
   m_EditorClassIdentifier: 
+  ID: 1
+  _ImgTower: {fileID: 0}
+  Cost: 3

@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class TowerData
-{
-    public byte Level;
-    public Transform Prefab;
-}
-
 public enum ETowerStatus
 {
     Building,
